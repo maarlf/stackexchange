@@ -1,5 +1,5 @@
-# dhv
-Hadoop, Hive, and MySQL running on Docker Containers
+# hivecluster
+Hadoop, Hive, and MySQL cluster running on Docker Containers
 
 ## On hadoop-master
 
