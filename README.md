@@ -16,7 +16,7 @@ Hadoop, Hive, and MySQL cluster running on Docker Containers
 ### Init hive schema
 `schematool --dbType mysql --initSchema`
 
-# Run metastore after init
+### Run metastore after init
 `hive --service metastore`
 
 ## On host
