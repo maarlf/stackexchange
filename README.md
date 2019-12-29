@@ -1,5 +1,5 @@
-# hivecluster
-Hadoop, Hive, and MySQL cluster running on Docker Containers
+# Stacklite
+Get insight from Stackoverflow datasets using Hadoop, Hive, and MySQL cluster running on Docker Containers.
 
 ## On hadoop-master
 
