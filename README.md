@@ -1,48 +1,85 @@
 # Stacklite
-Get insight from Stackoverflow datasets using Hadoop, Hive, and MySQL cluster running on Docker Containers.
+Get insight from Stack Overflow datasets using Hadoop, Hive, and MySQL cluster 
+that running on Docker containers so you can try on your own machine.
 
-## On hadoop-master
+The datasets in the `data` folder are retrieved from:
 
-### Format namenode
-`bin/hadoop namenode -format`
+```
+StackLite: A simple dataset of Stack Overflow questions and tags
+```
 
-### Start yarn and dfs nodes
-`sbin/start-dfs.sh`
-<br>
-`sbin/start-yarn.sh`
+It is available on <https://github.com/dgrtwo/StackLite>, and <https://www.kaggle.com/stackoverflow/stacklite>.
 
-## On hive
+## Prerequisites
+- Docker client installed.
 
-### Init hive schema
-`schematool --dbType mysql --initSchema`
+## Preparations
+First of, We need to pull necessary images for this cluster.
 
-### Run metastore after init
-`hive --service metastore`
+```
+$ ./pull-image.sh
+```
 
-## On host
+Hadoop and hive image that we used this time are based on Newnius,
+that you can check it out in his blog
 
-### Put data to hadoop-master from host
-`docker cp data/. hadoop-master:/usr/local/hadoop`
+https://blog.newnius.com/setup-apache-hive-in-docker.html
 
-## On hadoop-master
+Next up we can create our cluster by starting necessary containers,
+and connect them with a network.
 
-### Put data to hfds
-`bin/hadoop dfs -mkdir /<folder_name>`
-<br>
-`bin/hadoop dfs -put <your_data>.csv /<folder_name>`
-<br>
-`bin/hadoop dfs -put <your_data>.csv /<folder_name>`
-<br>
+```
+$ ./start-container.sh && ./run-container.sh
+```
 
-## On hive
+We're all set, now We can use the cluster to process data with Hive.
 
-### Create table on hive
+## How to use
+
+On `hadoop-master` node, we need to format namenode first
+
+```
+$ bin/hadoop namenode -format
+```
+
+Then, We can start yarn and dfs nodes
+```
+$ sbin/start-dfs.sh && sbin/start-yarn.sh
+```
+
+Initialize hive schema on `hive` node
+```
+$ schematool --dbType mysql --initSchema
+```
+
+Run metastore after init
+```
+$ hive --service metastore
+```
+
+Put data to hadoop-master from host
+```
+$ docker cp data/. hadoop-master:/usr/local/hadoop
+```
+
+Put data to hfds
+```
+$ bin/hadoop dfs -mkdir /<folder_name>
+```
+
+```
+$ bin/hadoop dfs -put <your_data>.csv /<folder_name>
+```
+
+First, We need to create table on hive node
 `Wil be added...`
 
-### Start doing some query, and export it as csv
-`hive -e '<query>' > <result_file>.csv`
+Start doing some query, and export it as csv
+```
+$ hive -e '<query>' > <result_file>.csv
+```
 
-## On host
-### Copy query result to host
-`docker cp hive:/usr/local/hive/<query_result>.csv result/data/`  
-
+On host, Copy query result to host
+```
+$ docker cp hive:/usr/local/hive/<query_result>.csv result/data/
+```
