@@ -72,14 +72,16 @@ $ bin/hadoop dfs -put <your_data>.csv /<folder_name>
 ```
 
 First, We need to create table on hive node
-`Wil be added...`
+```
+Wil be added...
+```
 
-Start doing some query, and export it as csv
+Start running some query, and export it as csv
 ```
 $ hive -e '<query>' > <result_file>.csv
 ```
 
-On host, Copy query result to host
+On host, copy query result to host
 ```
 $ docker cp hive:/usr/local/hive/<query_result>.csv result/data/
 ```
