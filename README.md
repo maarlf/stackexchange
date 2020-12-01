@@ -85,3 +85,5 @@ On host, copy query result to host
 ```
 $ docker cp hive:/usr/local/hive/<query_result>.csv result/data/
 ```
+
+Result and visualization can be seen on `result` folder
