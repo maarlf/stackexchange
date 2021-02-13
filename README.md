@@ -1,20 +1,25 @@
 # Stacklite
-Get insight from Stack Overflow datasets using Hadoop, Hive, and MySQL cluster 
-that running on Docker containers so you can try on your own machine.
 
-The datasets in the `data` folder are retrieved from:
+Get insight from Stack Overflow datasets using Hadoop, Hive, and MySQL cluster 
+that running on Docker containers so you can try on your own machine
+
+The datasets in the `dataset` folder are retrieved from:
 
 ```
 StackLite: A simple dataset of Stack Overflow questions and tags
 ```
 
-It is available on <https://github.com/dgrtwo/StackLite>, and <https://www.kaggle.com/stackoverflow/stacklite>.
+It is available on <https://github.com/dgrtwo/StackLite>, and <https://www.kaggle.com/stackoverflow/stacklite>
 
-## Prerequisites
-- Docker client installed.
+## Hive Cluster
 
-## Preparations
-First of, We need to pull necessary images for this cluster.
+### Prerequisites
+
+- Docker client installed
+
+### Preparations
+
+First of, We need to pull necessary images for this cluster
 
 ```
 $ ./pull-image.sh
@@ -26,15 +31,15 @@ that you can check it out in his blog
 https://blog.newnius.com/setup-apache-hive-in-docker.html
 
 Next up we can create our cluster by starting necessary containers,
-and connect them with a network.
+and connect them with a network
 
 ```
 $ ./start-container.sh && ./run-container.sh
 ```
 
-We're all set, now We can use the cluster to process data with Hive.
+We're all set, now We can use the cluster to process data with Hive
 
-## How to use
+### How to use
 
 On `hadoop-master` node, we need to format namenode first
 
@@ -87,3 +92,26 @@ $ docker cp hive:/usr/local/hive/<query_result>.csv result/data/
 ```
 
 Result and visualization can be seen on `result` folder
+
+## PySpark
+
+### Prerequisites
+
+- Python
+
+### Preparations
+
+On `pyspark-analysis` directory run
+```
+$ pip install -r requirements.txt
+```
+
+Run 
+
+```
+$ jupyter notebook
+```
+
+### How to use
+
+On `hadoop-master` node, we need to format namenode first
